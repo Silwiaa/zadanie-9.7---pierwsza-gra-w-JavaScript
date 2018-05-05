@@ -120,3 +120,12 @@ function checkRoundWinner(playerPick, computerPick) {
     }
 
 }
+
+function playerPick(playerPick) {
+    var computerPick = getComputerPick();
+
+    playerPickElem.innerHTML = playerPick;
+    computerPickElem.innerHTML = computerPick;
+
+    checkRoundWinner(playerPick, computerPick);
+}
