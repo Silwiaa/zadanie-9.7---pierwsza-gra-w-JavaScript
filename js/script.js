@@ -66,3 +66,8 @@ function newGame() {
   }
 
 }
+
+//pick Player
+function playerPick(playerPick) {
+    console.log(playerPick);
+}
