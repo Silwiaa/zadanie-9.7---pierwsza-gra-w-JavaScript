@@ -18,7 +18,7 @@ pickScissors.addEventListener('click', function () {
 });
 
 //start values
-var gameState = 'notStarted',  //started // ended
+var gameState = ['notStarted', 'started', 'ended';
     player = {
         name: '',
         score: 0
@@ -62,7 +62,7 @@ function newGame() {
     setGameElements();
 
     playerNameElem.innerHTML = player.name;
-    // setGamePoints(); // This function has not been created yet
+    setGamePoints(); 
   }
 
 }
@@ -128,4 +128,10 @@ function playerPick(playerPick) {
     computerPickElem.innerHTML = computerPick;
 
     checkRoundWinner(playerPick, computerPick);
+}
+
+//Score actualization
+function setGamePoints() {
+    playerPointsElem.innerHTML = player.score;
+    computerPointsElem.innerHTML = computer.score;
 }
