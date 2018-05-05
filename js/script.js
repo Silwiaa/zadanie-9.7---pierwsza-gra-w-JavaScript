@@ -6,6 +6,23 @@ var  pickRock = document.getElementById('js-playerPick_rock'),
      pickPaper = document.getElementById('js-playerPick_paper'),
      pickScissors = document.getElementById('js-playerPick_scissors');
 
-pickRock.addEventListener('click', function() { playerPick('rock') });
-pickPaper.addEventListener('click', function() { playerPick('paper') });
-pickScissors.addEventListener('click', function() { playerPick('scissors') });
+//player pick 
+pickRock.addEventListener('click', function () {
+    playerPick('rock')
+});
+pickPaper.addEventListener('click', function () {
+    playerPick('paper')
+});
+pickScissors.addEventListener('click', function () {
+    playerPick('scissors')
+});
+
+//start values
+var gameState = 'notStarted',  //started // ended
+    player = {
+        name: '',
+        score: 0
+    },
+    computer = {
+        score: 0
+    };
