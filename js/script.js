@@ -67,7 +67,17 @@ function newGame() {
 
 }
 
-//pick Player
+//Player pick
 function playerPick(playerPick) {
     console.log(playerPick);
+}
+
+//Computer pick
+var x = Math.random();
+
+Math.floor(Math.random()*3)
+
+function getComputerPick() {
+    var possiblePicks = ['rock', 'paper', 'scissors'];
+    return possiblePicks[Math.floor(Math.random()*3)];
 }
