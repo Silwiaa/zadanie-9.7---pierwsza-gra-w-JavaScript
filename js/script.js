@@ -1,11 +1,12 @@
+//new game button
 var newGameBtn = document.getElementById('js-newGameButton');
 newGameBtn.addEventListener('click', newGame);
 
+//player pick 
 var  pickRock = document.getElementById('js-playerPick_rock'),
      pickPaper = document.getElementById('js-playerPick_paper'),
      pickScissors = document.getElementById('js-playerPick_scissors');
 
-//player pick 
 pickRock.addEventListener('click', function () {
     playerPick('rock')
 });
@@ -17,7 +18,7 @@ pickScissors.addEventListener('click', function () {
 });
 
 //start values
-var gameState = 'notStarted',
+var gameState = 'ended', //started //ended
     player = {
         name: '',
         score: 0
@@ -26,6 +27,7 @@ var gameState = 'notStarted',
         score: 0
     };
 
+//set games elements
 var newGameElem = document.getElementById('js-newGameElement'),
     pickElem = document.getElementById('js-playerPickElement'),
     resultsElem = document.getElementById('js-resultsTableElement');
@@ -46,7 +48,9 @@ function setGameElements() {
             pickElem.style.display = 'none';
             resultsElem.style.display = 'none';
     }
+setGameElements();
 }
+
 
 //new game
 var playerPointsElem = document.getElementById('js-playerPoints'),
@@ -148,4 +152,103 @@ function endGame() {
     }
 }
 
-setGamesElements();
+
+//new game
+var playerPointsElem = document.getElementById('js-playerPoints'),
+    playerNameElem = document.getElementById('js-playerName'),
+    computerPointsElem = document.getElementById('js-computerPoints');
+
+function newGame() {
+  player.name = prompt('Please enter your name', 'imię gracza');
+  if (player.name) {
+    player.score = computer.score = 0;
+    gameState = 'started';
+    setGameElements();
+
+    playerNameElem.innerHTML = player.name;
+    setGamePoints(); 
+  }
+}
+
+//Player pick
+function playerPick(playerPick) {
+    console.log(playerPick);
+    var computerPick = getComputerPick ();
+    playerPickElem.innerHTML = playerPick;
+    computerPickElem.innerHTML = computerPick;
+    checkRoundWinner(playerPick, computerPick);
+}
+
+//Computer pick
+function getComputerPick() {
+    var possiblePicks = ['rock', 'paper', 'scissors'];
+    return possiblePicks[Math.floor(Math.random()*3)];
+}
+
+//Set Player/Computer pick on the site
+var playerPickElem = document.getElementById('js-playerPick'),
+    computerPickElem = document.getElementById('js-computerPick'),
+    playerResultElem = document.getElementById('js-playerResult'),
+    computerResultElem = document.getElementById('js-computerResult');
+
+function playerPick(playerPick) {
+    var computerPick = getComputerPick();
+
+    playerPickElem.innerHTML = playerPick;
+    computerPickElem.innerHTML = computerPick;
+}
+
+//Punctation
+function checkRoundWinner(playerPick, computerPick) {
+  playerResultElem.innerHTML = computerResultElem.innerHTML = '';
+
+  var winnerIs = 'player';
+
+    if (playerPick == computerPick) {
+        winnerIs = 'noone'; // remis
+    } else if (
+        (computerPick == 'rock' &&  playerPick == 'scissors') ||
+        (computerPick == 'scissors' &&  playerPick == 'paper') ||
+        (computerPick == 'paper' &&  playerPick == 'rock')) {
+
+        winnerIs = 'computer';
+    }
+
+    if (winnerIs == 'player') {
+        playerResultElem.innerHTML = "Win!";
+        player.score++;
+    } else if (winnerIs == 'computer') {
+        computerResultElem.innerHTML = "Win!";
+        computer.score++;
+    }
+
+}
+
+function playerPick(playerPick) {
+    var computerPick = getComputerPick();
+
+    playerPickElem.innerHTML = playerPick;
+    computerPickElem.innerHTML = computerPick;
+
+    checkRoundWinner(playerPick, computerPick);
+}
+
+//Score actualization
+function setGamePoints() {
+    playerPointsElem.innerHTML = player.score;
+    computerPointsElem.innerHTML = computer.score;
+}
+
+//Finish
+function endGame() {
+    if (computer.score == 10) {
+        gameState = 'ended';
+        alert('You loose:(');
+        setGameElements();
+    }
+    else if (player.score == 10) {
+        gameState = 'ended';
+        alert('You Win:)');
+        setGameElements();
+    }
+}
